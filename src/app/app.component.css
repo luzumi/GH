@@ -1,0 +1,35 @@
+/* Verstecken Sie das Menü und zeigen Sie den Button auf kleinen Bildschirmen */
+@media (max-width: 767px) {
+  #sidebarMenu {
+    display: none;
+  }
+  #menu-toggle {
+    display: block;
+  }
+}
+
+/* Zeigen Sie das Menü und verstecken Sie den Button auf größeren Bildschirmen */
+@media (min-width: 768px) {
+  #sidebarMenu {
+    display: block;
+  }
+  #menu-toggle {
+    display: none;
+  }
+}
+
+/* styles.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header,
+.app-footer {
+  flex: 0 0 auto;
+}
+
+.app-content {
+  flex: 1 1 auto;
+}

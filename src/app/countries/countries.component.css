@@ -1,0 +1,33 @@
+.letter-filter{
+  gap: 5px;
+  background-color: #198653;
+}
+
+.letter-filter button{
+  background-color: rgba(25, 134, 83, 0.6);
+  color: #cfe5db;
+  border: #cfe5db 1px solid;
+}
+.countries-content{
+  position: relative;
+}
+.countries-header{
+  position: relative;
+  /*orientierung oben am head*/
+  top: 0;
+  background-color: #a8d0bd;
+  padding: 10px;
+  margin-bottom: 10px;
+
+}
+
+.countries-header h1{
+  margin: 0;
+  padding: 0;
+  color: #198653;
+
+}
+
+tr {
+  cursor: pointer;
+}

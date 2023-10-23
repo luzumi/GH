@@ -1,0 +1,86 @@
+{
+  "id": "1",
+  "username": "Groundhopper123",
+  "email": "groundhopper@example.com",
+  "profileImage": "assets/img/profil.webp",
+  "visitedGames": [
+    {
+      "id": "game1",
+      "date": "2023-09-26",
+      "place": "Hamburg",
+      "country": "Deutschland",
+      "teams": "Hansa Rostock vs Atlantic FC",
+      "score": "2-1",
+      "images": [
+        "assets/img/hansa.png",
+        "assets/img/atlantic.svg"
+      ],
+      "report": "Es war ein tolles Spiel..."
+    },
+    {
+      "id": "game2",
+      "date": "2023-09-19",
+      "place": "Berlin",
+      "country": "Deutschland",
+      "teams": "Deutschland vs England",
+      "score": "0-0",
+      "images": [
+        "assets/img/dfb.jpg",
+        "assets/img/england.png"
+      ],
+      "report": "Leider gab es keine Tore..."
+    },
+    {
+      "id": "game1",
+      "date": "2023-09-26",
+      "place": "Hamburg",
+      "country": "Deutschland",
+      "teams": "Hansa Rostock vs Atlantic FC",
+      "score": "2-1",
+      "images": [
+        "assets/img/hansa.png",
+        "assets/img/atlantic.svg"
+      ],
+      "report": "Es war ein tolles Spiel..."
+    },
+    {
+      "id": "game2",
+      "date": "2023-09-19",
+      "place": "Berlin",
+      "country": "Deutschland",
+      "teams": "Deutschland vs England",
+      "score": "0-0",
+      "images": [
+        "assets/img/dfb.jpg",
+        "assets/img/england.png"
+      ],
+      "report": "Leider gab es keine Tore..."
+    },
+    {
+      "id": "game1",
+      "date": "2023-09-26",
+      "place": "Hamburg",
+      "country": "Deutschland",
+      "teams": "Hansa Rostock vs Atlantic FC",
+      "score": "2-1",
+      "images": [
+        "assets/img/hansa.png",
+        "assets/img/atlantic.svg"
+      ],
+      "report": "Es war ein tolles Spiel..."
+    },
+    {
+      "id": "game2",
+      "date": "2023-09-19",
+      "place": "Berlin",
+      "country": "Deutschland",
+      "teams": "Deutschland vs England",
+      "score": "0-0",
+      "images": [
+        "assets/img/dfb.jpg",
+        "assets/img/england.png"
+      ],
+      "report": "Leider gab es keine Tore..."
+    }
+  ]
+}

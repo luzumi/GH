@@ -1,0 +1,47 @@
+<div class="countries-content">
+  <div class="countries-header">
+    <h1>Länder</h1>
+    <!-- Buchstabenfilter -->
+    <div class="letter-filter">
+      <button *ngFor="let letter of alphabet" (click)="getCountriesByLetter(letter)">{{ letter }}</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th class="text-end">Flagge</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr [ngClass]="{'bg-light': i % 2 === 0, 'bg-secondary': i % 2 !== 0}"
+          *ngFor="let country of filteredCountries; let i = index" >
+          (click)="navigateToCountryDetail(country)">
+
+        <td><i>{{ country.code }}</i></td>
+        <td>{{ country.name }}</td>
+        <td class="text-end"><img [src]="country.flag" alt="{{ country.name }} Flagge" width="50"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginierung -->
+  <div class="pagination">
+    <ul class="pagination">
+      <li class="page-item" (click)="currentPage = currentPage > 1 ? currentPage - 1 : 1">
+        <a class="page-link">Zurück</a>
+      </li>
+      <li class="page-item" (click)="currentPage = currentPage < filteredCountries.length / pageSize ? currentPage + 1 : currentPage">
+        <a class="page-link">Weiter</a>
+      </li>
+    </ul>
+    <div class="page-size-selector">
+      <button class="btn btn-secondary" (click)="changePageSize(10)">10</button>
+      <button class="btn btn-secondary" (click)="changePageSize(25)">25</button>
+    </div>
+  </div>
+</div>

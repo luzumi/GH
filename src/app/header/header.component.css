@@ -1,0 +1,7 @@
+/* Header CSS Styles */
+.custom-header {
+  background-color: #28a745; /* Hintergrundfarbe von .bg-success */
+  height: 7rem;
+  margin: 0;
+  padding: 0;
+}
