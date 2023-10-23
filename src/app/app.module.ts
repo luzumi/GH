@@ -4,7 +4,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,6 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CountriesComponent } from './countries/countries.component';
 import { CountriesService } from './services/features/countries/countries.service';
 import { CountryDetailComponent } from './countries/country-detail/country-detail.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -28,6 +30,8 @@ import { CountryDetailComponent } from './countries/country-detail/country-detai
     ProfileComponent,
     CountriesComponent,
     CountryDetailComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     NgbModule,
@@ -37,6 +41,7 @@ import { CountryDetailComponent } from './countries/country-detail/country-detai
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: DOCUMENT, useValue: document },

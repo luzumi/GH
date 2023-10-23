@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
+import { Subscription } from 'rxjs';
 import { AppTitleService } from './services/app-title.service';
 
 @Component({
@@ -6,7 +8,17 @@ import { AppTitleService } from './services/app-title.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  isLoggedIn = false;
+  private authSubscription!: Subscription;
+
+  ngOnInit() {
+    this.authSubscription = this.authService.getAuthenticationStatus()
+        .subscribe(isLoggedIn => {
+          this.isLoggedIn = isLoggedIn;
+        });
+  }
+
   private _title!: string;
   public get title(): string {
     return this._title;
@@ -16,7 +28,7 @@ export class AppComponent {
     this.appTitleService.title = value;  // Update the service
   }
 
-  constructor(private appTitleService: AppTitleService) {
+  constructor(private appTitleService: AppTitleService, private authService: AuthService) {
     this.title = this.appTitleService.title;
   }
 
