@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private baseUrl: string = `${environment.apiBaseUrl}`;
+  public isAuthenticated: boolean = false;
 
   constructor(private http: HttpClient) { }
 

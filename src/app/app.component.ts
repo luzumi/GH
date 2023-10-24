@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Subscription } from 'rxjs';
 import { AppTitleService } from './services/app-title.service';
 
 @Component({
@@ -10,13 +9,9 @@ import { AppTitleService } from './services/app-title.service';
 })
 export class AppComponent implements OnInit{
   isLoggedIn = false;
-  private authSubscription!: Subscription;
 
   ngOnInit() {
-    this.authSubscription = this.authService.getAuthenticationStatus()
-        .subscribe(isLoggedIn => {
-          this.isLoggedIn = isLoggedIn;
-        });
+    this.authService.checkInitialAuthentication();
   }
 
   private _title!: string;

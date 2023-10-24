@@ -1,10 +1,12 @@
+<!-- login.component.html -->
+<h1>Login</h1>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
-        <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+        <label for="identifier">Email or Username</label>
+        <input type="text" class="form-control" id="identifier" formControlName="identifier" placeholder="Enter email or username">
+        <div *ngIf="loginForm.get('identifier')?.invalid && (loginForm.get('identifier')?.dirty || loginForm.get('identifier')?.touched)">
             <small class="text-danger">
-                Please enter a valid email address.
+                Please enter a valid email or username.
             </small>
         </div>
     </div>

@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
         menu.style.display = 'none';  // Oder 'block', je nachdem, was Sie beim Laden anzeigen möchten
     }
     this.userDataService.getUserProfile(1).then(profile => {
+      console.log('profile: ', JSON.stringify(profile))
       this.userProfile = profile;
       this.visitedGamesCount = profile.visitedGames.length;
       const visitedGrounds: string[] = [];
