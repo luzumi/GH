@@ -18,6 +18,7 @@ import { CountriesService } from './services/features/countries/countries.servic
 import { CountryDetailComponent } from './countries/country-detail/country-detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {AuthService} from "./auth.service";
 
 
 
@@ -47,6 +48,7 @@ import { RegisterComponent } from './register/register.component';
     { provide: DOCUMENT, useValue: document },
     { provide: USER_DATA_SERVICE, useClass: JsonUserDataService },  // Verwenden Sie den InjectionToken
     CountriesService,
+    [ AuthService ],
 
   ],
   bootstrap: [AppComponent],

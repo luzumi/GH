@@ -10,13 +10,15 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public static isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    (localStorage.getItem('isLoggedIn') === 'true')
+  );
   userId: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  static counter=0;
   private baseUrl: string = `${environment.apiBaseUrl}`;
 
   constructor(private http: HttpClient, private router: Router) {
+    AuthService.isLoggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isLoggedIn') === 'true');
   }
 
   register(username: string, email: string, password: string) {
@@ -25,7 +27,7 @@ export class AuthService {
   }
 
   login(identifier: string, password: string): Observable<any> {
-    console.log(`${this.baseUrl}/user/login`)
+    console.log(`${this.baseUrl}/user/login`, AuthService.isLoggedIn.value)
     return this.http.post(
       `${this.baseUrl}/user/login`,
       {identifier, password},
@@ -33,15 +35,14 @@ export class AuthService {
     ).pipe(
       tap((response: any)  => {
         // Hier können Sie den Authentifizierungsstatus setzen, z.B.
-        console.log('Login successful', response);
-        this.isAuthenticated.next(true);
+        localStorage.setItem('isLoggedIn', 'true');
         this.userId.next(response.user._id);
-        this.isLoggedIn.next(true);
-        this.setLoggedIn(true);
+        AuthService.isLoggedIn.next(true);
       }),
       catchError(err => {
         // Fehlerbehandlung
         console.error('Login failed', err);
+        localStorage.setItem('isLoggedIn', 'false');
         return throwError(() => {
           const error: any = new Error(`This is error auth.service.ts: ${err.status}`);
           error.timestamp = Date.now();
@@ -51,30 +52,10 @@ export class AuthService {
     );
   }
 
-
-  setLoggedIn(status: boolean): void {
-    this.isAuthenticated.next(status);
-  }
-
   logout() {
-    this.isAuthenticated.next(false);
-    this.isLoggedIn.next(false);
+    AuthService.isLoggedIn.next(false);
+    localStorage.removeItem('isLoggedIn');
+    this.userId.next('');
     this.router.navigate(['/login']);
-  }
-
-  checkInitialAuthentication() {
-    this.http.get('/').subscribe(
-      (response: any) => {
-        this.isAuthenticated.next(response.isAuthenticated);
-      },
-      () => {
-        this.isAuthenticated.next(false);
-      }
-    );
-  }
-
-
-  getAuthenticationStatus(): Observable<boolean> {
-    return this.isAuthenticated.asObservable();
   }
 }

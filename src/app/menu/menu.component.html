@@ -12,8 +12,9 @@
     </ng-container>
 
     <ng-template #notProfile>
-      <li class="nav-item text-decoration-none bg-success-subtle text-success-emphasis ">
-        <a class="nav-link active text-success" href="{{item.link}}">{{item.label}}</a>
+      <li [class.active]="isActive(item.link)" class="nav-item text-decoration-none bg-success-subtle text-success-emphasis ">
+
+      <a class="nav-link active text-success" [routerLink]="item.link">{{item.label}}</a>
       </li>
     </ng-template>
   </ng-container>

@@ -13,6 +13,7 @@ interface Country {
   templateUrl: './countries.component.html',
   styleUrls: ['./countries.component.css']
 })
+
 export class CountriesComponent implements OnInit {
   countries: Country[] = [];
   filteredCountries: Country[] = [];

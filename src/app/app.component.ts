@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from './auth.service';
 import {AppTitleService} from './services/app-title.service';
+import {NgZone} from '@angular/core';
 
 
 
@@ -10,15 +11,25 @@ import {AppTitleService} from './services/app-title.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild('sidebarMenu', { static: false }) sidebarMenu!: ElementRef;
-  @ViewChild('menuToggle', { static: false }) menuToggle!: ElementRef;
+  @ViewChild('sidebarMenu', {static: false}) sidebarMenu!: ElementRef;
+  @ViewChild('menuToggle', {static: false}) menuToggle!: ElementRef;
 
   ngAfterViewInit() {
-    this.toggleMenu();
+    this.zone.run(() => {
+      this.toggleMenu();
+    });
+  }
+
+  constructor(
+    private appTitleService: AppTitleService,
+    private zone: NgZone,
+  ) {
+    this.title = this.appTitleService.title;
+
   }
 
   private _title!: string;
-  isLoggedIn: any;
+  isLoggedIn: boolean = AuthService.isLoggedIn.value;
 
   public get title(): string {
     return this._title;
@@ -29,39 +40,42 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.appTitleService.title = value;  // Update the service
   }
 
-  constructor(private appTitleService: AppTitleService, private authService: AuthService) {
-    this.title = this.appTitleService.title;
 
-  }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isAuthenticated;
+    // Abonniere den isLoggedIn BehaviorSubject.
+    AuthService.isLoggedIn.subscribe(value => {
+      this.isLoggedIn = value;
+    });
+    // Rest des Codes
   }
 
   toggleMenu(): void {
-    const menu = this.sidebarMenu.nativeElement;
-    const button = this.menuToggle.nativeElement;
-
-    if (!menu || !button) {
-      console.error('Menu, content, or button element not found');
+    if (!this.sidebarMenu) {
       return;
     }
 
-    button.addEventListener('click', () => {
-      if (this.isLoggedIn) {
-        // Button-Sichtbarkeit überprüfen
-        const isButtonVisible = window.getComputedStyle(button).display !== 'none';
+    if (!AuthService.isLoggedIn || !this.sidebarMenu?.nativeElement || !this.menuToggle?.nativeElement) {
+      console.error('Menu, content, or button element not found or user is not logged in');
+      return;
+    }
 
-        if (isButtonVisible) {
-          if (menu.style.display === 'block' || menu.style.display === '') {
-            menu.style.display = 'none';
-          } else {
-            menu.style.display = 'block';
-          }
+    const menu = this.sidebarMenu.nativeElement;
+    const button = this.menuToggle.nativeElement;
+
+    button.addEventListener('click', () => {
+      // Button-Sichtbarkeit überprüfen
+      const isButtonVisible = window.getComputedStyle(button).display !== 'none';
+      if (isButtonVisible) {
+        if (menu.style.display === 'block' || menu.style.display === '') {
+          menu.style.display = 'none';
         } else {
-          // Verhalten, wenn der Button nicht sichtbar ist (optional)
+          menu.style.display = 'block';
         }
+      } else {
+        // Verhalten, wenn der Button nicht sichtbar ist (optional)
       }
     });
   }
+
 }

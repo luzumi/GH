@@ -34,11 +34,13 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/'])
                 .then(() => console.log('navigate to /'))
                 .catch(err => console.error('error navigating to /', err));
-              this.authService.isAuthenticated.next(true);
+              AuthService.isLoggedIn.next(true);
+              localStorage.setItem('isLoggedIn', 'true');
             },
             error => {
               // Login fehlgeschlagen, Fehlermeldung anzeigen
               console.error('Login failed', error);
+              localStorage.setItem('isLoggedIn', 'false');
             }
           );
         }

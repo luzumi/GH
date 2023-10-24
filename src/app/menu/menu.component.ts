@@ -17,13 +17,22 @@ export class MenuComponent implements OnInit {
   public isCollapsed: boolean = false;
   public userProfile: any;  // Initialisiere die Variable
 
+  @ViewChild('menu') menu: ElementRef = new ElementRef(
+    this.document.querySelector("#navbarSupportedContent"));
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(USER_DATA_SERVICE) private userDataService: UserDataService,
+    private authService: AuthService) {
+  }
+
   items: Array<{
     label: string;
     link: string;
   }> = [
     {
       label: 'Profil',
-      link: '/profile/{id}'
+      link: '/profile/' + this.authService.userId.value
     },
     {
       label: 'Länder',
@@ -48,18 +57,14 @@ export class MenuComponent implements OnInit {
     {
       label: 'Einstellungen',
       link: '/settings'
+    },
+    {
+      label: 'Logout',
+      link: '/logout'
     }
   ];
 
 
-  @ViewChild('menu') menu: ElementRef = new ElementRef(
-    this.document.querySelector("#navbarSupportedContent"));
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(USER_DATA_SERVICE) private userDataService: UserDataService,
-    private authService: AuthService) {
-  }
 
   ngOnInit() {
     let menuButton: ElementRef = new ElementRef(this.document.querySelector("#btn"));
@@ -75,5 +80,9 @@ export class MenuComponent implements OnInit {
         });
       }
     });
+  }
+
+  isActive(link: string): boolean {
+    return window.location.pathname === link;
   }
 }
