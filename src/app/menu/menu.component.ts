@@ -1,8 +1,9 @@
 // menu.component.ts
 
-import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { UserDataService, USER_DATA_SERVICE } from '../services/user-data.service';
+import {Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {UserDataService, USER_DATA_SERVICE} from '../services/user-data.service';
+import {AuthService} from "../auth.service";
 
 
 @Component({
@@ -51,19 +52,28 @@ export class MenuComponent implements OnInit {
   ];
 
 
-  @ViewChild('menu') menu: ElementRef = new ElementRef(this.document.querySelector("#navbarSupportedContent"));
+  @ViewChild('menu') menu: ElementRef = new ElementRef(
+    this.document.querySelector("#navbarSupportedContent"));
 
-  constructor(@Inject(DOCUMENT) private document: Document, @Inject(USER_DATA_SERVICE) private userDataService: UserDataService) {
-
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(USER_DATA_SERVICE) private userDataService: UserDataService,
+    private authService: AuthService) {
   }
 
   ngOnInit() {
-  let menuButton: ElementRef = new ElementRef(this.document.querySelector("#btn"));
-  menuButton.nativeElement?.addEventListener('click', () => {
-    this.menu.nativeElement.classList.toggle('show');
-  });
-  this.userDataService.getUserProfile(1).then(profile => {
-    this.userProfile = profile;
-  });
+    let menuButton: ElementRef = new ElementRef(this.document.querySelector("#btn"));
+    menuButton.nativeElement?.addEventListener('click', () => {
+      this.menu.nativeElement.classList.toggle('show');
+    });
+
+    // Benutzer-ID abrufen
+    this.authService.userId.subscribe(userId => {
+      if (userId) {
+        this.userDataService.getUserProfile(userId).then(profile => {
+          this.userProfile = profile;
+        });
+      }
+    });
   }
 }

@@ -1,40 +1,40 @@
 <!-- app.component.html -->
 
 <div class="app-container">
-    <header class="app-header">
-        <nav class="navbar navbar-expand-xl navbar-light bg-light w-100 m-0 p-0">
-            <a class="navbar-brand w-100 m-0 p-0" href="#">
-                <header class="p-0"></header>
-            </a>
-        </nav>
-    </header>
-
-    <nav class="app-nav">
-        <button id="menu-toggle" class="d-md-none btn btn-secondary" (click)="toggleMenu()">
-            ☰
-        </button>
+  <header class="app-header">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light w-100 m-0 p-0">
+      <a class="navbar-brand w-100 m-0 p-0" href="#">
+        <header class="p-0"></header>
+      </a>
     </nav>
+  </header>
 
-    <div class="container-fluid p-0 vh-100">
-        <div class="row no-gutters vh-100">
-            <!-- Menu -->
-            <div *ngIf="isLoggedIn">
-                <nav id="sidebarMenu" class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0">
-                    <div class="position-sticky h-100">
-                        <menu class="collapsed h-100"></menu>
-                    </div>
-                </nav>
-            </div>
-            <!-- Content -->
-            <main role="main"
-                  class="col-md-9 ml-sm-auto col-lg-9 px-md-4 d-flex align-items-center justify-content-center">
-                <router-outlet></router-outlet>
-            </main>
-        </div>
+  <nav class="app-nav">
+    <button id="menu-toggle" #menuToggle class="d-md-none btn btn-secondary" (click)="toggleMenu()">
+      ☰
+    </button>
+  </nav>
+
+  <div class="container-fluid p-0 vh-100">
+    <div class="row no-gutters vh-100">
+      <!-- Menu -->
+      <div *ngIf="isLoggedIn">
+        <nav id="sidebarMenu" #sidebarMenu class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0">
+          <div class="position-sticky h-100">
+            <menu class="collapsed h-100"></menu>
+          </div>
+        </nav>
+      </div>
+      <!-- Content -->
+      <main role="main"
+            class="col-md-9 ml-sm-auto col-lg-9 px-md-4 d-flex align-items-center justify-content-center">
+        <router-outlet></router-outlet>
+      </main>
     </div>
+  </div>
 
 
-    <footer class="app-footer">
-        <!-- Fußzeile deiner Anwendung -->
-    </footer>
+  <footer class="app-footer">
+    <!-- Fußzeile deiner Anwendung -->
+  </footer>
 </div>

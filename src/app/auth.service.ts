@@ -11,6 +11,8 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  userId: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private baseUrl: string = `${environment.apiBaseUrl}`;
 
@@ -29,10 +31,12 @@ export class AuthService {
       {identifier, password},
       {withCredentials: true}
     ).pipe(
-      tap(response => {
+      tap((response: any)  => {
         // Hier können Sie den Authentifizierungsstatus setzen, z.B.
         console.log('Login successful', response);
         this.isAuthenticated.next(true);
+        this.userId.next(response.user._id);
+        this.isLoggedIn.next(true);
         this.setLoggedIn(true);
       }),
       catchError(err => {
@@ -54,11 +58,12 @@ export class AuthService {
 
   logout() {
     this.isAuthenticated.next(false);
+    this.isLoggedIn.next(false);
     this.router.navigate(['/login']);
   }
 
   checkInitialAuthentication() {
-    this.http.get('/api/check-auth').subscribe(
+    this.http.get('/').subscribe(
       (response: any) => {
         this.isAuthenticated.next(response.isAuthenticated);
       },
