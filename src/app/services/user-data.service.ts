@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { UserProfile } from './userData.interface';
+import {UserProfile} from 'src/app/models/UserProfile';
 
 export interface UserDataService {
   getUserProfile(id:string): Promise<UserProfile>;

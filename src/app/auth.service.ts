@@ -36,7 +36,7 @@ export class AuthService {
       tap((response: any)  => {
         // Hier können Sie den Authentifizierungsstatus setzen, z.B.
         localStorage.setItem('isLoggedIn', 'true');
-        this.userId.next(response.user._id);
+        AuthService.userId.next(response.user._id);
         AuthService.isLoggedIn.next(true);
       }),
       catchError(err => {
@@ -55,7 +55,7 @@ export class AuthService {
   logout() {
     AuthService.isLoggedIn.next(false);
     localStorage.removeItem('isLoggedIn');
-    this.userId.next('');
+    AuthService.userId.next('');
     this.router.navigate(['/login']);
   }
 }

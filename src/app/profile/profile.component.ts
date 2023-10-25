@@ -1,5 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {UserProfile} from '../services/userData.interface';
+import {UserProfile} from 'src/app/models/UserProfile';
 import {UserDataService, USER_DATA_SERVICE} from '../services/user-data.service';
 import {AuthService} from "../auth.service";
 
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     if (menu) {
       menu.style.display = 'none';  // Oder 'block', je nachdem, was Sie beim Laden anzeigen möchten
     }
-    this.userDataService.getUserProfile(this.authService.userId.value).then(profile => {
+    this.userDataService.getUserProfile(AuthService.userId.value).then(profile => {
       this.userProfile = profile;
       this.visitedGamesCount = profile.visitedGames.length;
       const visitedGrounds: string[] = [];

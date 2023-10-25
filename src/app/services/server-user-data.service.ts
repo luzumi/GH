@@ -6,7 +6,7 @@ import {UserProfile} from 'src/app/models/UserProfile';
 @Injectable({
   providedIn: 'root'
 })
-export class JsonUserDataService implements UserDataService {
+export class ServerUserDataService implements UserDataService {
 
   constructor(private http: HttpClient) { }
 

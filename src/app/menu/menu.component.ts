@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
   }> = [
     {
       label: 'Profil',
-      link: '/profile/' + this.authService.userId.value
+      link: '/profile/' + AuthService.userId.value
     },
     {
       label: 'Länder',
@@ -73,7 +73,7 @@ export class MenuComponent implements OnInit {
     });
 
     // Benutzer-ID abrufen
-    this.authService.userId.subscribe(userId => {
+    AuthService.userId.subscribe(userId => {
       if (userId) {
         this.userDataService.getUserProfile(userId).then(profile => {
           this.userProfile = profile;
