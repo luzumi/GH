@@ -6,6 +6,7 @@ import { CountryDetailComponent } from "./countries/country-detail/country-detai
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from "./services/auth.guard";
+import {LogoutComponent} from "./logout/logout.component";
 
 const routes: Routes = [
   { path: '', component: ProfileComponent, canActivate: [AuthGuard] },
@@ -15,6 +16,8 @@ const routes: Routes = [
   { path: 'countries/country=:countryKey', component: CountryDetailComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'logout', component: LogoutComponent }
+
   // { path: '**', redirectTo: '/login' }
 ];
 
