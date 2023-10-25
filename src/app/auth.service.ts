@@ -13,7 +13,7 @@ export class AuthService {
   public static isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     (localStorage.getItem('isLoggedIn') === 'true')
   );
-  userId: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public static userId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   static counter=0;
   private baseUrl: string = `${environment.apiBaseUrl}`;
 
