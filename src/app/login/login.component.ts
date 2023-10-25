@@ -22,30 +22,38 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(): void {
-      console.log('onSubmit: ',this.loginForm)
         if (this.loginForm.valid) {
             const identifier = this.loginForm.get('identifier')?.value;
             const password = this.loginForm.get('password')?.value;
 
-          this.authService.login(identifier, password).subscribe(
-            response => {
-              // Login erfolgreich, Benutzer umleiten
-              console.log('Login successful', response);
-              this.router.navigate(['/'])
-                .then(() => console.log('navigate to /'))
-                .catch(err => console.error('error navigating to /', err));
-              AuthService.isLoggedIn.next(true);
-              localStorage.setItem('isLoggedIn', 'true');
-            },
-            error => {
-              // Login fehlgeschlagen, Fehlermeldung anzeigen
-              console.error('Login failed', error);
-              localStorage.setItem('isLoggedIn', 'false');
-            }
-          );
+            this.authService.login(identifier, password).subscribe(
+                response => {
+                    console.log('Login successful', response);
+
+                    const userId = response.user._id; // Die Eigenschaft hängt von der Struktur Ihrer Antwort ab
+                    if (userId) {
+                        AuthService.userId.next(userId);
+                        localStorage.setItem('userId', userId);
+                    }
+
+                    this.router.navigate(['/'])
+                        .then(() => console.log('navigate to /'))
+                        .catch(err => console.error('error navigating to /', err));
+
+                    AuthService.isLoggedIn.next(true);
+                    localStorage.setItem('isLoggedIn', 'true');
+                },
+                error => {
+                    console.error('Login failed', error);
+                    AuthService.isLoggedIn.next(false);
+                    localStorage.setItem('isLoggedIn', 'false');
+                }
+            );
+
         }
     }
 
-    ngOnInit(): void {}
-
+    ngOnInit(): void {
+    }
 }
+

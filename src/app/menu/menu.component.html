@@ -5,7 +5,7 @@
 
       <li class="nav-item text-decoration-none bg-success-subtle text-success-emphasis ">
         <a *ngIf="userProfile" class="nav-link active text-success-emphasis" [routerLink]="['/profile', userProfile.id]">
-          <img [src]="userProfile.profileImage" alt="Profilbild" class="img-thumbnail">
+          <img [src]="userProfile.profilImage" alt="Profilbild" class="img-thumbnail">
           <p>{{ userProfile.username }}</p>
         </a>
       </li>
