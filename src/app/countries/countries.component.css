@@ -31,3 +31,12 @@
 tr {
   cursor: pointer;
 }
+
+.table-responsive {
+  max-height: calc(100vh - 20rem); /* 150px ist ein Beispielwert, dieser sollte dem kombinierten Platzbedarf des Headers und des Footers entsprechen. */
+  overflow-y: auto;
+}
+
+.countries-content{
+  position: relative;
+}

@@ -40,6 +40,11 @@ export class CountriesComponent implements OnInit {
     });
   }
 
+  public get paginatedCountries(): Country[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.filteredCountries.slice(startIndex, startIndex + this.pageSize);
+  }
+
   getCountriesByLetter(letter: string): void {
     this.countriesService.fetchCountriesByLetter(letter).subscribe({
       next: (data) => {
@@ -59,5 +64,6 @@ export class CountriesComponent implements OnInit {
 
   changePageSize(size: number): void {
     this.pageSize = size;
+    this.currentPage = 1;
   }
 }
