@@ -1,6 +1,15 @@
 <div class="countries-content">
+    <!--    Countries Letter-Selector-->
     <div class="countries-header">
         <h1>Länder</h1>
+        <!--  Search  -->
+        <div class="search mb-1 pb-1 pt-1">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Suche"
+                   [(ngModel)]="searchTerm"
+                   (input)="filterCountries()">
+        </div>
         <!-- Buchstabenfilter -->
         <div class="letter-filter">
             <button *ngFor="let letter of alphabet" (click)="getCountriesByLetter(letter)">{{ letter }}</button>
@@ -8,6 +17,7 @@
         </div>
     </div>
 
+    <!-- Countries-Table -->
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
