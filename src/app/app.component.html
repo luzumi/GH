@@ -1,6 +1,16 @@
 <!-- app.component.html -->
 
-<div class="app-container">
+<!--
+  Die App-Komponente ist die Wurzelkomponente deiner Anwendung.
+  Sie enthält die Struktur deiner Anwendung und die Navigation.
+  Die Struktur deiner Anwendung besteht aus einem Header, einem
+  Navigationsbereich, einem Inhaltsbereich und einer Fußzeile.
+  Die Navigation besteht aus einem Menü, das sich ein- und ausblenden lässt.
+  Der Inhaltsbereich ist ein Router-Outlet, in dem die Komponenten deiner Anwendung
+  angezeigt werden.
+  Die Fußzeile ist ein Platzhalter für die Fußzeile deiner Anwendung.
+-->
+<div class="app-container d-flex flex-column vh-100">
   <header class="app-header">
     <nav class="navbar navbar-expand-xl navbar-light bg-light w-100 m-0 p-0">
       <a class="navbar-brand w-100 m-0 p-0" href="#">
@@ -8,33 +18,31 @@
       </a>
     </nav>
   </header>
-
   <nav class="app-nav">
     <button id="menu-toggle" #menuToggle class="d-md-none btn btn-secondary" (click)="toggleMenu()">
       ☰
     </button>
-  </nav>
+    <!-- Logout-Button -->
+    <button id="logout-button" class="d-md-none btn btn-danger" (click)="logout()">Logout</button>
 
-  <div class="container-fluid p-0 vh-100">
+  </nav>
+  <div class="container-fluid p-0 flex-grow-1">
     <div class="row no-gutters vh-100">
       <!-- Menu -->
-      <div *ngIf="isLoggedIn">
-        <nav id="sidebarMenu" #sidebarMenu class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0">
-          <div class="position-sticky h-100">
-            <menu class="collapsed h-100"></menu>
-          </div>
+      <div *ngIf="AuthService.isLoggedIn.value" class="col-md-3 col-lg-3 d-md-block bg-success-subtle vh-100">
+        <nav id="sidebarMenu" #sidebarMenu class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0"
+             [style.display]="isLoggedIn ? 'block' : 'none'">
+          <menu class="collapsed h-100"></menu>
         </nav>
       </div>
       <!-- Content -->
-      <main role="main"
-            class="col-md-9 ml-sm-auto col-lg-9 px-md-4 d-flex align-items-center justify-content-center">
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4 d-flex align-items-center justify-content-center">
         <router-outlet></router-outlet>
       </main>
     </div>
   </div>
 
-
   <footer class="app-footer">
-    <!-- Fußzeile deiner Anwendung -->
+    <!-- Fußzeile der Anwendung -->
   </footer>
 </div>

@@ -19,6 +19,12 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) {
         AuthService.isLoggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isLoggedIn') === 'true');
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const userId = localStorage.getItem('userId');
+        if (isLoggedIn && userId) {
+            AuthService.isLoggedIn.next(true);
+            AuthService.userId.next(userId);
+        }
     }
 
     register(username: string, email: string, password: string) {
@@ -27,8 +33,6 @@ export class AuthService {
     }
 
     login(identifier: string, password: string): Observable<any> {
-        console.log(`${this.baseUrl}/user/login`, AuthService.isLoggedIn.value)
-        console.log('Identifier: ', identifier, 'Password: ', password)
         return this.http.post(
             `${this.baseUrl}/user/login`,
             {identifier, password},
@@ -60,11 +64,14 @@ export class AuthService {
     }
 
     logout() {
-        this.router.navigate(['/login'])
-            .then(() => {
-                AuthService.isLoggedIn.next(false);
-                localStorage.removeItem('isLoggedIn');
-                AuthService.userId.next('');
-            });
+        AuthService.isLoggedIn.next(false);
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userId');
+        AuthService.userId.next('');
+
+        this.router.navigate(['/']).then(() => {
+            location.reload();
+        });
     }
+
 }

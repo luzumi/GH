@@ -24,6 +24,12 @@ export class ProfileComponent implements OnInit {
         if (menu) {
             menu.style.display = 'none';  // Oder 'block', je nachdem, was Sie beim Laden anzeigen möchten
         }
+        // if (AuthService.userId.value && AuthService.userId.value !== "") {
+        //     AuthService.userId.next( localStorage.getItem('userId') || '');
+        // } else {
+        //     console.warn('UserId is missing or empty');
+        // }
+
         this.userDataService.getUserProfile(AuthService.userId.value)
             .then(profile => {
                 this.userProfile = profile;

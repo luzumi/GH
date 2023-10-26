@@ -5,6 +5,7 @@ import {NgZone} from '@angular/core';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,15 +15,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('sidebarMenu', {static: false}) sidebarMenu!: ElementRef;
   @ViewChild('menuToggle', {static: false}) menuToggle!: ElementRef;
 
-  ngAfterViewInit() {
-    this.zone.run(() => {
-      this.toggleMenu();
-    });
-  }
+
 
   constructor(
     private appTitleService: AppTitleService,
     private zone: NgZone,
+    private authService: AuthService
   ) {
     this.title = this.appTitleService.title;
 
@@ -43,39 +41,51 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    // Abonniere den isLoggedIn BehaviorSubject.
-    AuthService.isLoggedIn.subscribe(value => {
-      this.isLoggedIn = value;
-    });
-    // Rest des Codes
+
   }
 
+  ngAfterViewInit() {
+    this.zone.run(() => {
+      this.toggleMenu();
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+  }
   toggleMenu(): void {
-    if (!this.sidebarMenu) {
+    console.dir({
+      "logged-Auth": AuthService.isLoggedIn.value,
+      "menu": this.sidebarMenu?.nativeElement,
+      "button": this.menuToggle?.nativeElement,
+      "zone": this.zone,
+      "title": this.title,
+      "appTitleService": this.appTitleService,
+      "appTitleService.title": this.appTitleService.title,
+    });
+
+
+    // Überprüfen, ob die Elemente existieren
+    if (!this.sidebarMenu?.nativeElement || !this.menuToggle?.nativeElement) {
+      console.error('Menu, content, or button element not found');
       return;
     }
 
-    if (!AuthService.isLoggedIn || !this.sidebarMenu?.nativeElement || !this.menuToggle?.nativeElement) {
-      console.error('Menu, content, or button element not found or user is not logged in');
-      return;
-    }
+    console.log('Menu, content, and button elements found')
 
     const menu = this.sidebarMenu.nativeElement;
     const button = this.menuToggle.nativeElement;
 
+    // Nutzen der isLoggedIn-Variable
+    menu.style.display = AuthService.isLoggedIn.value ? 'block' : 'none';
+
     button.addEventListener('click', () => {
-      // Button-Sichtbarkeit überprüfen
       const isButtonVisible = window.getComputedStyle(button).display !== 'none';
       if (isButtonVisible) {
-        if (menu.style.display === 'block' || menu.style.display === '') {
-          menu.style.display = 'none';
-        } else {
-          menu.style.display = 'block';
-        }
-      } else {
-        // Verhalten, wenn der Button nicht sichtbar ist (optional)
+        menu.style.display = (menu.style.display === 'block' || menu.style.display === '') ? 'none' : 'block';
       }
     });
   }
 
+  protected readonly AuthService = AuthService;
 }

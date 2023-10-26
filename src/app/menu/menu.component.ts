@@ -4,6 +4,7 @@ import {Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {UserDataService, USER_DATA_SERVICE} from '../services/user-data.service';
 import {AuthService} from "../auth.service";
+import {UserProfile} from "../models/UserProfile";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {AuthService} from "../auth.service";
 
 export class MenuComponent implements OnInit {
     public isCollapsed: boolean = false;
-    public userProfile: any;  // Initialisiere die Variable
+    public userProfile: UserProfile | null = null;  // Initialisiere die Variable
 
     @ViewChild('menu') menu: ElementRef = new ElementRef(
         this.document.querySelector("#navbarSupportedContent"));
