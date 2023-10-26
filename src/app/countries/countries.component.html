@@ -18,27 +18,38 @@
     </div>
 
     <!-- Countries-Table -->
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th class="text-end">Flagge</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr [ngClass]="{'bg-light': i % 2 === 0, 'bg-secondary': i % 2 !== 0}"
-                *ngFor="let country of paginatedCountries; let i = index"
-                (click)="navigateToCountryDetail(country)"> <!-- Klick-Event richtig gebunden -->
+    <div *ngIf="isLoading">Laden...</div>
+    <div *ngIf="!isLoading">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Flagge</th>
+                    <th class="text-end">Ligen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr [ngClass]="{'bg-light': i % 2 === 0, 'bg-secondary': i % 2 !== 0}"
+                    *ngFor="let country of paginatedCountries; let i = index"
+                    (click)="navigateToCountryDetail(country)"> <!-- Klick-Event richtig gebunden -->
 
-                <td class="fs-6"><i>{{ country.code }}</i></td>
-                <td class="fs-6">{{ country.name }}</td>
-                <td class="fs-6 text-end"><img [src]="country.flag" alt="{{ country.name }} Flagge" width="30"></td>
-            </tr>
-            </tbody>
+                    <td class="fs-6"><i>{{ country.code }}</i></td>
+                    <td class="fs-6">{{ country.name }}</td>
+                    <td class="fs-6 "><img [src]="country.flag" alt="{{ country.name }} Flagge" width="30"></td>
+                    <td class="fs-6 text-end">
+                        <ng-container *ngIf="country.leagues; else noLeagues">
+                            <img *ngFor="let league of country.leagues" [src]="league.logo" alt="{{ league.name }}"
+                                 width="30">
+                        </ng-container>
+                        <ng-template #noLeagues>Keine Ligen</ng-template>
+                    </td>
+                </tr>
+                </tbody>
 
-        </table>
+            </table>
+        </div>
     </div>
 
     <!-- Paginierung -->
