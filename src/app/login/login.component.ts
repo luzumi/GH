@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
 
             this.authService.login(identifier, password).subscribe(
                 response => {
-                    console.log('Login successful', response);
 
                     const userId = response.user._id; // Die Eigenschaft hängt von der Struktur Ihrer Antwort ab
                     if (userId) {
