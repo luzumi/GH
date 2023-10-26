@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';  // Router importieren
 import {CountriesService} from '../services/features/countries/countries.service';
 import {CountryResponse} from '../models/country';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-countries',

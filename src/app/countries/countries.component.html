@@ -40,10 +40,10 @@
                     <td class="fs-6 "><img [src]="country.flag" alt="{{ country.name }} Flagge" width="30"></td>
                     <td class="fs-6 text-end">
                         <ng-container *ngIf="country.leagues; else noLeagues">
-                            <img *ngFor="let league of country.leagues" [src]="league.logo" alt="{{ league.name }}"
-                                 width="30">
+                            <img *ngFor="let league of country.leagues" [src]="league.logo" alt="{{ league.name }} "
+                                 width="30" [title]="league.name + ' ' + league.id ">
                         </ng-container>
-                        <ng-template #noLeagues>Keine Ligen</ng-template>
+                        <ng-template #noLeagues></ng-template>
                     </td>
                 </tr>
                 </tbody>
