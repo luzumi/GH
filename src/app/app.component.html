@@ -22,9 +22,6 @@
     <button id="menu-toggle" #menuToggle class="d-md-none btn btn-secondary" (click)="toggleMenu()">
       ☰
     </button>
-    <!-- Logout-Button -->
-    <button id="logout-button" class="d-md-none btn btn-danger" (click)="logout()">Logout</button>
-
   </nav>
   <div class="container-fluid p-0 flex-grow-1">
     <div class="row no-gutters vh-100">
@@ -36,7 +33,7 @@
         </nav>
       </div>
       <!-- Content -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4 d-flex align-items-center justify-content-center">
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-9 pt-4 px-md-4 d-flex align-items-top justify-content-center">
         <router-outlet></router-outlet>
       </main>
     </div>
