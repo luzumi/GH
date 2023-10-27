@@ -37,7 +37,12 @@
 
                     <td class="fs-6"><i>{{ country.code }}</i></td>
                     <td class="fs-6">{{ country.name }}</td>
-                    <td class="fs-6 "><img [src]="country.flag" alt="{{ country.name }} Flagge" width="30"></td>
+                    <td class="fs-6 ">
+                      <img [src]="getImageUrl(country.flag)"
+                           (error)="onImageError($event)"
+                           alt="{{ country.name }} Flagge"
+                           width="30">
+                    </td>
                     <td class="fs-6 text-end">
                         <ng-container *ngIf="country.leagues; else noLeagues">
                             <img *ngFor="let league of country.leagues" [src]="league.logo" alt="{{ league.name }} "
