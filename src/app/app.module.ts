@@ -20,6 +20,7 @@ import {RegisterComponent} from './register/register.component';
 import {AuthService} from "./auth.service";
 import {ServerUserDataService} from "./services/server-user-data.service";
 import {LogoutComponent} from "./logout/logout.component";
+import { CountriesTableComponent } from './countries/countries-table/countries-table.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {LogoutComponent} from "./logout/logout.component";
         LoginComponent,
         RegisterComponent,
         LogoutComponent,
+        CountriesTableComponent,
 
     ],
     imports: [
