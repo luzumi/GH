@@ -13,7 +13,8 @@
         <!-- Buchstabenfilter -->
         <div class="letter-filter">
             <button *ngFor="let letter of alphabet" (click)="getCountriesByLetter(letter)">{{ letter }}</button>
-            <button class="letter-filter" (click)="getAllCountries()">Alle</button>
+          <button (click)="fetchAndCacheAllCountries()" class="letter-filter">Alle</button>
+
         </div>
     </div>
 

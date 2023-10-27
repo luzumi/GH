@@ -41,3 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 /angular-frontend.zip
+/src.zip
+/src/manifest.webmanifest
