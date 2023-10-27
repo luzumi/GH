@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';  // Router importieren
 import {CountriesService} from '../services/features/countries/countries.service';
 import {CountryResponse} from '../models/country';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {ImageCachingService} from 'src/app/services/image-caching.service';  // 1. Importiere den ImageCachingService
+import {ImageCachingService} from 'src/app/services/image-caching.service';
+import {DelayService} from "../services/delay.service";  // 1. Importiere den ImageCachingService
 
 @Component({
   selector: 'app-countries',
@@ -22,7 +22,8 @@ export class CountriesComponent implements OnInit {
   constructor(
     private router: Router,
     private countriesService: CountriesService,
-    private imageCachingService: ImageCachingService  // 1. Injiziere den Service
+    private imageCachingService: ImageCachingService,
+    private delayService: DelayService
   ) {
   } // Router injizieren
 
@@ -37,22 +38,37 @@ export class CountriesComponent implements OnInit {
       next: (data) => {
         this.countries = data as CountryResponse[];
         this.filteredCountries = [...this.countries];
-        // 2. Cache die Bilder
-        this.countries.forEach(country => {
-          if (!this.imageCachingService.isImageCached(country.flag)) {
-            // Lade das Bild und füge es dem Cache hinzu (Annahme: loadImageAsBase64 ist eine Funktion, die du implementieren musst)
-            this.loadImageAsBase64(country.flag).then(base64 => {
-              this.imageCachingService.cacheImage(country.flag, base64);
-            });
-          }
-        });
         this.isLoading = false;
+        this.cacheCountryFlags(this.countries).then(() => {
+          console.log('Alle Flaggen sind im Cache.');
+        });
       },
       error: (err) => {
         console.error('Fehler beim Abrufen der Länder:', err);
         this.isLoading = false;
       }
     });
+  }
+
+
+  async cacheCountryFlags(countries: CountryResponse[]): Promise<void> {
+    const flagPromises = countries.map(country => {
+      return new Promise<void>((resolve) => {
+        if (!this.imageCachingService.isImageCached(country.flag)) {
+          // Angenommen, loadImageAsBase64 ist eine asynchrone Methode, die ein Base64-Bild zurückgibt
+          this.loadImageAsBase64(country.flag).then(base64 => {
+            this.imageCachingService.cacheImage(country.flag, base64);
+            resolve();
+          }).catch(() => {
+            resolve(); // Fange mögliche Fehler auf und resolve das Promise, um weiterzumachen
+          });
+        } else {
+          resolve(); // Wenn das Bild bereits im Cache ist, resolve das Promise sofort
+        }
+      });
+    });
+
+    await Promise.allSettled(flagPromises); // Warte, bis alle Flaggen geladen und gecached sind
   }
 
   // 3. Verwende den Cache in der HTML-Datei oder wo auch immer du das Bild anzeigst.
@@ -66,9 +82,9 @@ export class CountriesComponent implements OnInit {
   }
 
   async loadImageAsBase64(url: string): Promise<string> {
-    // Implementiere das Laden des Bildes als Base64
-    return '';  // Rückgabe des Base64-Strings
+    return '';
   }
+
 
   filterCountries() {
     if (this.searchTerm) {
