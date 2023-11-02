@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {CountriesService} from 'src/app/services/features/countries/countries.service';
 import {CountryResponse} from "../../models/country";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -9,8 +10,10 @@ import {CountryResponse} from "../../models/country";
   templateUrl: './country-detail.component.html',
   styleUrls: ['./country-detail.component.css']
 })
+
 export class CountryDetailComponent implements OnInit {
   countryDetail: CountryResponse | null = null;
+  @Input() leagueName: string | undefined;
 
   constructor(private route: ActivatedRoute, private countriesService: CountriesService) { }
 
@@ -23,7 +26,7 @@ export class CountryDetailComponent implements OnInit {
       this.countriesService.fetchCountryDetail(countryName).subscribe({
         next: (data) => {
           this.countryDetail = data;
-          console.log('Länderdetails erfolgreich abgerufen:', data);
+          console.log('Länderdetails erfolgreich abgerufen:', this.countryDetail.name);
         },
         error: (err) => {
           console.error('Fehler beim Abrufen der Länderdetails:', err);
@@ -31,4 +34,6 @@ export class CountryDetailComponent implements OnInit {
       });
     }
   }
+
+  protected readonly JSON = JSON;
 }

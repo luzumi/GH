@@ -23,7 +23,6 @@ export class CountriesComponent implements OnInit {
     private router: Router,
     private countriesService: CountriesService,
     private imageCachingService: ImageCachingService,
-    private delayService: DelayService
   ) {
   }
 

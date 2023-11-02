@@ -3,14 +3,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule, DOCUMENT} from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {MenuComponent} from './menu/menu.component';
 import {HeaderComponent} from './header/header.component';
 import {ContentComponent} from './content/content.component';
 import {ProfileComponent} from './profile/profile.component';
-import {USER_DATA_SERVICE} from './services/user-data.service';  // Importieren Sie den InjectionToken
+import {USER_DATA_SERVICE} from './services/user-data.service'; // Importieren Sie den InjectionToken
 import {AppRoutingModule} from './app-routing.module';
 import {CountriesComponent} from './countries/countries.component';
 import {CountriesService} from './services/features/countries/countries.service';
@@ -20,7 +19,11 @@ import {RegisterComponent} from './register/register.component';
 import {AuthService} from "./auth.service";
 import {ServerUserDataService} from "./services/server-user-data.service";
 import {LogoutComponent} from "./logout/logout.component";
-import { CountriesTableComponent } from './countries/countries-table/countries-table.component';
+import {CountriesTableComponent} from './countries/countries-table/countries-table.component';
+import {LeagueOverviewComponent} from "./countries/country-detail/league-overview/league-overview.component";
+import {LeagueDetailComponent} from './Leagues/league-detail/league-detail.component';
+import {SeasonOverviewComponent} from "./countries/country-detail/season-overview/season-overview.component";
+
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { CountriesTableComponent } from './countries/countries-table/countries-t
         RegisterComponent,
         LogoutComponent,
         CountriesTableComponent,
-
+        LeagueOverviewComponent,
+        LeagueDetailComponent,
+        SeasonOverviewComponent,
     ],
     imports: [
         NgbModule,
