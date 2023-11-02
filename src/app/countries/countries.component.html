@@ -34,7 +34,7 @@
                 <tbody>
                 <tr [ngClass]="{'bg-light': i % 2 === 0, 'bg-secondary': i % 2 !== 0}"
                     *ngFor="let country of paginatedCountries; let i = index"
-                    (click)="navigateToCountryDetail(country)"> <!-- Klick-Event richtig gebunden -->
+                    (click)="navigateToCountryDetail(country)">
 
                     <td class="fs-6"><i>{{ country.code }}</i></td>
                     <td class="fs-6">{{ country.name }}</td>
@@ -45,9 +45,9 @@
                            width="30">
                     </td>
                     <td class="fs-6 text-end">
-                        <ng-container *ngIf="country.leagues; else noLeagues">
-                            <img *ngFor="let league of country.leagues" [src]="league.logo" alt="{{ league.name }} "
-                                 width="30" [title]="league.name + ' ' + league.id ">
+                      <ng-container *ngIf="country.leagues; else noLeagues">
+                            <img *ngFor="let entry of country.leagues" [src]="entry.league.logo" alt="{{entry.league.id}} Logo"
+                                 width="30" [title]="entry.league.name + ' ' + entry.league.id ">
                         </ng-container>
                         <ng-template #noLeagues></ng-template>
                     </td>

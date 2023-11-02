@@ -56,7 +56,7 @@ export class CountriesComponent implements OnInit {
   }
 
   onImageError(event: any): void {
-    event.target.src = '../../../assets/img/worldIcon.png';
+    event.target.src = 'assets/img/worldIcon.png';
   }
 
   loadImageAsBase64(url: string): Promise<string> {
@@ -85,7 +85,8 @@ export class CountriesComponent implements OnInit {
   }
 
   navigateToCountryDetail(country: CountryResponse): void {
-    this.router.navigate([`/countries/country=${country.code}`]);
+    console.log('Navigiere zu Länderdetails:', country)
+    this.router.navigate([`/countries/detail/${country.name}`]);
   }
 
   private cacheCountryFlags(): Promise<void[]> {
@@ -112,4 +113,6 @@ export class CountriesComponent implements OnInit {
     this.pageSize = size;
     this.currentPage = 1;
   }
+
+  protected readonly JSON = JSON;
 }

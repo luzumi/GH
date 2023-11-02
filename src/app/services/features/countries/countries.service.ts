@@ -23,6 +23,6 @@ export class CountriesService {
   }
 
   fetchCountryDetail(countryKey: string): Observable<CountryResponse> {
-    return this.httpClient.get<CountryResponse>(`${this.baseUrl}/countries/${countryKey}`);
+    return this.httpClient.get<CountryResponse>(`${this.baseUrl}/countries/detail/${countryKey}`);
   }
 }

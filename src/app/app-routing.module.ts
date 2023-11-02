@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'countries', component: CountriesComponent, canActivate: [AuthGuard] },
   { path: 'countries/:letter', component: CountriesComponent, canActivate: [AuthGuard] },
-  { path: 'countries/country=:countryKey', component: CountryDetailComponent, canActivate: [AuthGuard] },
+  { path: 'countries/detail/:name', component: CountryDetailComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent }
