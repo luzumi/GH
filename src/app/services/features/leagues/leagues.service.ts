@@ -57,5 +57,15 @@ export class LeaguesService {
       })
     );
   }
+
+  createTable(id: number, season: number): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/league/standings/:leagueId:season`, { id:id, season:season }).pipe(
+      tap((data: any) => console.log('Table data received:', data)),
+      catchError((error: any) => {
+        console.error('Error fetching table:', error);
+        return throwError(() => new Error('Error fetching table'));
+      })
+    );
+  }
 }
 

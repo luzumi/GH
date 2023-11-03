@@ -1,20 +1,20 @@
-<p>HALLO {{league?.league?.name}}</p>
+
 <div *ngIf="league">
-  <img src="{{ league?.league?.logo }}"  alt="logo"/>
-  <p>{{ league?.league?.name }}</p>
-  <p>{{ league?.league?.type }}</p>
-  <p>{{ league?.country?.name }}</p>
-  <p>{{ league?.country?.code }}</p>
-  <div *ngFor="let entry of league.seasons">
-    <p>{{ entry?.year }}</p>
-    <p>{{ entry?.start }}</p>
-    <p>{{ entry?.end }}</p>
-    <p>{{ entry?.current }}</p>
-    <p>{{ entry?.coverage?.fixtures?.events }}</p>
-    <p>{{ entry?.coverage?.fixtures?.lineups }}</p>
-    <p>{{ entry?.coverage?.standings }}</p>
-    <p>{{ entry?.coverage?.players }}</p>
-    <p>{{ entry?.coverage?.odds }}</p>
+
+  <p class="w-50 pt-3 container"><img src="{{league?.league?.logo}}" class="img-thumbnail w-50"/><b>{{ league?.league?.name }}</b></p>
+  <p>Liga-Typ: <b>{{ league?.league?.type }}</b></p>
+  <p class="w-25">Land: <img src="{{league?.country?.flag}}" class="img-thumbnail w-25"/><b>{{ league?.country?.name }}</b>  </p>
+  <p>Code: {{ league?.country?.code }}</p>
+  <div *ngFor="let entry of league?.seasons">
+    <p class="container-fluid">Season: <b>{{ entry?.year }} - {{ (entry!.year +1)}}</b></p>
+    <p class="container-fluid">Start am: <b>{{ entry?.start }} -- {{ entry?.end }}</b></p>
+
+    <p class="container-fluid">current: <b>{{ entry?.current }}</b></p>
+    <p class="container-fluid">coverage?.fixtures?.events: <b>{{ entry?.coverage?.fixtures?.events }}</b></p>
+    <p class="container-fluid">coverage?.fixtures?.lineups: <b>{{ entry?.coverage?.fixtures?.lineups }}</b></p>
+    <p class="container-fluid">coverage?.standings: <b>{{ entry?.coverage?.standings }}</b></p>
+    <p class="container-fluid">coverage?.players: <b>{{ entry?.coverage?.players }}</b></p>
+    <p class="container-fluid">coverage?.odds: <b>{{ entry?.coverage?.odds }}</b></p>
   </div>
 
   <!-- Weitere Details Ihrer Liga hier anzeigen -->
