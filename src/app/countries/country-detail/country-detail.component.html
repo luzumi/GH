@@ -1,1 +1,32 @@
-<p>country-detail works!</p>
+<div class="container my-3">
+  <div class="row align-items-start">
+    <div class="col-auto">
+      <img src="{{countryDetail?.flag}}" alt="Flagge" class="img-fluid" style="max-width: 100px;">
+    </div>
+    <div class="col">
+      <h1>{{countryDetail?.name}}</h1>
+      <p class="text-muted">{{countryDetail?.code}}</p>
+    </div>
+  </div>
+</div>
+<!-- Container für die Tabs -->
+<div class="container mt-3">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" id="leagues-tab" data-toggle="tab" href="league-overview" role="tab" aria-controls="leagues" aria-selected="true">Ligen</a>
+
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#">Stadien</a>
+    </li>
+  </ul>
+
+  <!-- Tab-Inhalte -->
+  <div class="tab-content">
+    <!-- Tab für Ligen -->
+      <app-league-overview [countryName]="countryDetail?.name" [leagues]="countryDetail?.leagues"></app-league-overview>
+    <div id="stadien" class="container tab-pane fade">
+<!--      <app-stadium-list></app-stadium-list>-->
+    </div>
+  </div>
+</div>

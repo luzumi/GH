@@ -1,115 +1,21 @@
-.profil-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.profil-info {
-  position: relative;
-  top: 10vh;
-  text-align: center;  /* Zentriert den Text innerhalb des .profil-info Divs */
-  display: flex;
-  flex-direction: column;
-  align-items: center;  /* Zentriert alle untergeordneten Elemente horizontal */
-  width: 100%;
-}
-
-.hopper-info {
-  display: flex;
-  justify-content: space-between;  /* Optional: für gleichmäßigen Abstand zwischen den Elementen */
-  width: 45%;  /* Du kannst diese Breite nach Bedarf anpassen */
-}
-
-.hopper-info p {
-  font-size: smaller; /* Verkleinert die Schriftgröße */
-}
-
-.container-for-game-info {
-  justify-content: center;
-  width: 100%;
-}
-
-.game-list-container {
-  position: relative;
-  top: 10vh;
-  max-height: 60vh;  /* Höhe eines .game-info Elements mal 3 */
-  overflow-y: auto;
-}
-
-.game-info {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 3rem;
-  width: 100%;
-}
-
 .game-info:hover {
-  background-color: #cfe5db; /* Oder jede andere Farbe deiner Wahl */
-  transition: background-color 0.3s ease; /* Optional: für einen sanften Übergang */
-}
-
-.game-date-place {
-  text-align: center;
-  font-size: smaller;
-  margin-bottom: 10px;
-}
-
-.team-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.team {
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-.team img {
-  height: 3rem;
-  margin: 0 10px;
-}
-
-.team span {
-  margin: 0 10px;
-}
-
-.vs {
-  margin: 0 20px;
-}
-
-.score {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.game-report {
-  margin-top: 10px;
-  text-align: center;
+  background-color: #cfe5db;
+  transition: background-color 0.3s ease;
 }
 
 .img-thumbnail {
-  width: 50px;
-  height: 50px;
-  margin: 0 10px;
+  width: 7rem;
+  height: 7rem;
+  border: none;
+  background-color: transparent;
 }
 
-hr{
-
+hr {
   border: 0;
-
   height: 5px;
+  background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
 
-  background-image: linear-gradient(to right,
-
-  rgba(0,0,0,0),
-
-  rgba(0,0,0,75),
-
-  rgba(0,0,0,0));
-
+.override-alignment {
+  align-self: flex-start;
 }

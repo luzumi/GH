@@ -1,35 +1,67 @@
 <!-- app.component.html -->
 
-<div class="app-container">
+<!--
+  Die App-Komponente ist die Wurzelkomponente der Anwendung.
+  Sie enthält die Struktur deiner Anwendung und die Navigation.
+  Die Struktur der Anwendung besteht aus einem Header, einem
+  Navigationsbereich, einem Inhaltsbereich und einer Fußzeile.
+  Die Navigation besteht aus einem Menü, das sich ein- und ausblenden lässt.
+  Der Inhaltsbereich ist ein Router-Outlet, in dem die Komponenten deiner Anwendung
+  angezeigt werden.
+  Die Fußzeile ist ein Platzhalter für die Fußzeile deiner Anwendung.
+-->
+
+<!-- Hauptcontainer der Anwendung, verwendet Flexbox für das Layout und nimmt die volle Höhe des Viewports ein -->
+<div class="app-container d-flex flex-column vh-100">
+
+  <!-- Kopfzeile der Anwendung mit eingebetteter Navigationsleiste -->
   <header class="app-header">
+    <!-- Navigationsleiste mit Bootstrap-Klassen für Responsivität und Lichtthema -->
     <nav class="navbar navbar-expand-xl navbar-light bg-light w-100 m-0 p-0">
-      <a class="navbar-brand w-100 m-0 p-0" href="#"><header class="p-0"></header></a>
+      <!-- Logo der Anwendung, hier könnte ein Bild oder Text als Logo eingefügt werden -->
+      <a class="navbar-brand w-100 m-0 p-0" href="#">
+        <!-- Der innere Header-Tag scheint hier überflüssig zu sein, eventuell entfernen -->
+        <header class="p-0"></header>
+      </a>
     </nav>
   </header>
 
+  <!-- Navigationsteil der Anwendung, enthält den Menü-Button für kleine Bildschirme -->
   <nav class="app-nav">
-    <button id="menu-toggle" class="d-md-none btn btn-secondary" (click)="toggleMenu()">
+    <!-- Menü-Button, der nur auf kleinen Bildschirmen angezeigt wird -->
+<!--    TODO: Menu Darstellung noch buggie-->
+    <button id="menu-toggle" #menuToggle class="d-md-none btn btn-secondary" (click)="toggleMenu()">
       ☰
     </button>
   </nav>
 
-  <div class="container-fluid p-0 vh-100">
+  <!-- Hauptteil der Anwendung, der flexibel wächst, um den restlichen Platz einzunehmen -->
+  <div class="container-fluid p-0 flex-grow-1">
     <div class="row no-gutters vh-100">
-      <!-- Menu -->
-      <nav id="sidebarMenu" class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0">
-        <div class="position-sticky h-100">
+
+      <!-- Seitenmenü, das nur angezeigt wird, wenn der Benutzer eingeloggt ist -->
+      <!-- TODO: AuthService im Template ist nicht ideal, besser wäre eine Komponentenvariable -->
+      <div *ngIf="AuthService.isLoggedIn.value" class="col-md-3 col-lg-3 d-md-block bg-success-subtle vh-100">
+        <!-- Das eigentliche Menü, dessen Anzeige vom Login-Status abhängt -->
+        <nav id="sidebarMenu" #sidebarMenu class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0"
+             [style.display]="isLoggedIn ? 'block' : 'none'">
           <menu class="collapsed h-100"></menu>
-        </div>
-      </nav>
-      <!-- Content -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4 d-flex align-items-center justify-content-center">
-        <router-outlet></router-outlet> <!-- Hier wird der dynamische Inhalt geladen -->
+        </nav>
+      </div>
+
+      <!-- Hauptinhaltsbereich, in dem die Routen-Komponenten angezeigt werden -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-9 pt-4 px-md-4 d-flex align-items-top justify-content-center">
+
+        <!-- Hauptinhaltsbereich: 'router-outlet' ist der Platzhalter für geroutete Ansichten (Komponenten). -->
+        <!-- Wenn eine Route aktiviert wird, wird die entsprechende Komponente in dieses Element geladen. -->
+        <router-outlet></router-outlet>
+
       </main>
     </div>
   </div>
 
-
+  <!-- Fußzeile der Anwendung, Platz für zusätzliche Informationen oder Links -->
   <footer class="app-footer">
-    <!-- Fußzeile deiner Anwendung -->
+    <!-- Hier könnten Kontaktinformationen, Copyrights und Links zu Datenschutzrichtlinien stehen -->
   </footer>
 </div>

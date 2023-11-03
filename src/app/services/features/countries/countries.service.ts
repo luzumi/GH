@@ -18,11 +18,11 @@ export class CountriesService {
     return this.httpClient.get(`${this.baseUrl}/countries/${letter}`);
   }
 
-  fetchAllCountries() {
-    return this.httpClient.get(`${this.baseUrl}/countries/all`);
+  fetchAllCountries(letter: string) {
+    return this.httpClient.get(`${this.baseUrl}/countries/${letter}`);
   }
 
   fetchCountryDetail(countryKey: string): Observable<CountryResponse> {
-    return this.httpClient.get<CountryResponse>(`${this.baseUrl}/countries/${countryKey}`);
+    return this.httpClient.get<CountryResponse>(`${this.baseUrl}/countries/detail/${countryKey}`);
   }
 }

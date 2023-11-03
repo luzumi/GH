@@ -1,0 +1,21 @@
+<p>HALLO {{league?.league?.name}}</p>
+<div *ngIf="league">
+  <img src="{{ league?.league?.logo }}"  alt="logo"/>
+  <p>{{ league?.league?.name }}</p>
+  <p>{{ league?.league?.type }}</p>
+  <p>{{ league?.country?.name }}</p>
+  <p>{{ league?.country?.code }}</p>
+  <div *ngFor="let entry of league.seasons">
+    <p>{{ entry?.year }}</p>
+    <p>{{ entry?.start }}</p>
+    <p>{{ entry?.end }}</p>
+    <p>{{ entry?.current }}</p>
+    <p>{{ entry?.coverage?.fixtures?.events }}</p>
+    <p>{{ entry?.coverage?.fixtures?.lineups }}</p>
+    <p>{{ entry?.coverage?.standings }}</p>
+    <p>{{ entry?.coverage?.players }}</p>
+    <p>{{ entry?.coverage?.odds }}</p>
+  </div>
+
+  <!-- Weitere Details Ihrer Liga hier anzeigen -->
+</div>

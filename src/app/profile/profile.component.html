@@ -1,47 +1,41 @@
 <!-- Rest des Codes ... -->
-<div class="profil-content">
-  <div *ngIf="userProfile">
-    <!-- Profilinformationen -->
-    <div class="profil-info">
-      <img [src]="userProfile.profileImage" alt="Profilbild" class="img-thumbnail">
-      <h1 class="fs-2">{{ userProfile.username }}</h1>
-      <p class="fs-6">Email: {{ userProfile.email }}</p>
-      <div class="hopper-info">
-        <div><p>Spiele</p>
-          <p class="fw-bolder fs-5">{{ visitedGamesCount }}</p></div>
-        <div><p>Stadien</p>
-          <p class="fw-bolder fs-5">{{ visitedGroundsCount }}</p></div>
-        <div><p>Länder</p>
-          <p class="fw-bolder fs-5">{{ visitedCountriesCount }}</p></div>
-      </div>
-    </div>
-    <!-- Weitere Statistiken... -->
 
-    <!-- Liste der besuchten Spiele -->
-    <div class="game-list-container">
-      <div *ngFor="let game of userProfile.visitedGames">
-        <div class="container-for-game-info">
-          <div class="game-info">
-            <p class="game-date-place">{{ game.date }} - {{ game.place }}</p>
-            <hr>
-            <div class="team-info">
-              <div class="team">
-                <img [src]="game.images[0]" alt="" class="img-fluid">
-                <span>{{ game.teams.split(' vs ')[0] }}</span>
-              </div>
-              <div class="vs">:</div>
-              <div class="team">
-                <span>{{ game.teams.split(' vs ')[1] }}</span>
-                <img [src]="game.images[1]" alt="" class="img-fluid">
-              </div>
-            </div>
-            <div class="score">{{ game.score.split('-')[0] }} : {{ game.score.split('-')[1] }}</div>
-            <p class="game-report">Bericht: {{ game.report }}</p>
-            <hr>
-          </div>
+<div *ngIf="userProfile" class="profil-content d-flex flex-column align-items-center w-100 override-alignment">
+    <div class="profil-info d-flex flex-column align-items-center w-100 text-center">
+        <img [src]="userProfile.profilImage" alt="Profilbild" class="img-thumbnail">
+        <h1 class="display-4">{{ userProfile.username }}</h1>
+        <p class="text-muted">{{ userProfile.email }}</p>
+        <div class="hopper-info d-flex justify-content-between w-100">
+            <div><p>Spiele</p>
+                <p class="fw-bolder fs-5">{{ visitedGamesCount }}</p></div>
+            <div><p>Stadien</p>
+                <p class="fw-bolder fs-5">{{ visitedGroundsCount }}</p></div>
+            <div><p>Länder</p>
+                <p class="fw-bolder fs-5">{{ visitedCountriesCount }}</p></div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="game-list-container position-relative mt-1 w-100">
+        <div *ngFor="let game of userProfile.visitedGames"
+             class="container-for-game-info d-flex  w-100">
+            <div class="game-info border p-3 mb-5 w-100">
+                <p class="game-date-place">{{ game.date }} - {{ game.place }}</p>
+                <hr>
+                <div class="team-info">
+                    <div class="team">
+                        <img [src]="game.images[0]" alt="" class="img-fluid">
+                        <span>{{ game.teams.split(' vs ')[0] }}</span>
+                    </div>
+                    <div class="vs">:</div>
+                    <div class="team">
+                        <span>{{ game.teams.split(' vs ')[1] }}</span>
+                        <img [src]="game.images[1]" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="score">{{ game.score.split('-')[0] }} : {{ game.score.split('-')[1] }}</div>
+                <p class="game-report">Bericht: {{ game.report }}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
 </div>
 

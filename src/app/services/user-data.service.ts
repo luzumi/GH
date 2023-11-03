@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
-import { UserProfile } from './userData.interface';
+import {UserProfile} from 'src/app/models/UserProfile';
 
 export interface UserDataService {
-  getUserProfile(id:number): Promise<UserProfile>;
+  getUserProfile(id:string): Promise<UserProfile>;
   // Weitere Methoden können hier hinzugefügt werden
 }
 

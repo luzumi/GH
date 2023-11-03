@@ -1,47 +1,83 @@
+<!-- Hauptcontainer für die Anzeige von Ländern -->
 <div class="countries-content">
+  <!-- Kopfbereich mit Überschrift und Suchfeld -->
   <div class="countries-header">
     <h1>Länder</h1>
-    <!-- Buchstabenfilter -->
+    <!-- Suchfeld, bindet den Wert an 'searchTerm' und ruft 'filterCountries()' bei Eingabe auf -->
+    <div class="search mb-1 pb-1 pt-1">
+      <input type="text"
+             class="form-control"
+             placeholder="Suche"
+             [(ngModel)]="searchTerm"
+             (input)="filterCountries()">
+    </div>
+    <!-- Container für den Buchstabenfilter, generiert Buttons für jeden Buchstaben im Alphabet -->
     <div class="letter-filter">
       <button *ngFor="let letter of alphabet" (click)="getCountriesByLetter(letter)">{{ letter }}</button>
+      <!-- Button, um alle Länder abzurufen und zu cachen -->
+      <button (click)="fetchAndCacheAllCountries()" class="letter-filter">Alle</button>
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th class="text-end">Flagge</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr [ngClass]="{'bg-light': i % 2 === 0, 'bg-secondary': i % 2 !== 0}"
-          *ngFor="let country of filteredCountries; let i = index" >
-          (click)="navigateToCountryDetail(country)">
-
-        <td><i>{{ country.code }}</i></td>
-        <td>{{ country.name }}</td>
-        <td class="text-end"><img [src]="country.flag" alt="{{ country.name }} Flagge" width="50"></td>
-      </tr>
-      </tbody>
-    </table>
+  <!-- Bedingte Anzeige für Ladezustand und Ländertabelle -->
+  <div *ngIf="isLoading">Laden...</div>
+  <div *ngIf="!isLoading">
+    <!-- Responsiver Container für die Tabelle -->
+    <div class="table-responsive">
+      <!-- Tabelle für Länder mit Kopfzeile und Datenzeilen -->
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Flagge</th>
+          <th class="text-end">Ligen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Schleife über paginierte Länder, setzt alternierende Hintergrundfarben und ermöglicht Navigation zu Länderdetails -->
+        <tr [ngClass]="{'bg-light': i % 2 === 0, 'bg-secondary': i % 2 !== 0}"
+            *ngFor="let country of paginatedCountries; let i = index"
+            (click)="navigateToCountryDetail(country)">
+          <!-- Ländercode, Landesname, Flagge und Ligen mit Fehlerbehandlung für Bilder -->
+          <td class="fs-6"><i>{{ country.code }}</i></td>
+          <td class="fs-6">{{ country.name }}</td>
+          <td class="fs-6">
+            <img [src]="getImageUrl(country.flag)"
+                 (error)="onImageError($event)"
+                 alt="{{ country.name }} Flagge"
+                 width="30">
+          </td>
+          <td class="fs-6 text-end">
+            <!-- Bedingte Anzeige von Ligen mit Ersatzinhalt, falls keine vorhanden sind -->
+            <ng-container *ngIf="country.leagues; else noLeagues">
+              <img *ngFor="let entry of country.leagues" [src]="entry.league.logo" alt="{{entry.league.id}} Logo"
+                   width="30" [title]="entry.league.name + ' ' + entry.league.id ">
+            </ng-container>
+            <ng-template #noLeagues></ng-template>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Paginierung -->
-  <div class="pagination">
+  <!-- Paginierungsbereich mit Vor- und Zurück-Buttons und Seitengrößenanpassung -->
+  <div class="pagination w-100">
     <ul class="pagination">
-      <li class="page-item" (click)="currentPage = currentPage > 1 ? currentPage - 1 : 1">
-        <a class="page-link">Zurück</a>
+      <li class="page-item p-2" (click)="currentPage = currentPage > 1 ? currentPage - 1 : 1">
+        <a class="btn btn-outline-secondary">Zurück</a>
       </li>
-      <li class="page-item" (click)="currentPage = currentPage < filteredCountries.length / pageSize ? currentPage + 1 : currentPage">
-        <a class="page-link">Weiter</a>
+      <!-- Buttons zur Anpassung der Seitengröße -->
+      <div class="page-size-selector p-2">
+        <button class="btn btn-secondary" (click)="changePageSize(10)">10</button>
+        <button class="btn btn-secondary" (click)="changePageSize(25)">25</button>
+        <button class="btn btn-secondary" (click)="changePageSize(filteredCountries.length)">Alle</button>
+      </div>
+      <li class="page-item p-2"
+          (click)="currentPage = currentPage < (filteredCountries.length / pageSize) ? currentPage + 1 : currentPage">
+        <a class="btn btn-outline-secondary">Weiter</a>
       </li>
     </ul>
-    <div class="page-size-selector">
-      <button class="btn btn-secondary" (click)="changePageSize(10)">10</button>
-      <button class="btn btn-secondary" (click)="changePageSize(25)">25</button>
-    </div>
   </div>
 </div>

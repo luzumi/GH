@@ -1,20 +1,26 @@
-<!-- Bootstrap-styled Menu Content -->
+<!-- menu/menu.component.html -->
 <ul class="nav row">
   <ng-container *ngFor="let item of items; let isFirst = first" class="text-success">
     <ng-container *ngIf="item.label == 'Profil'; else notProfile">
 
       <li class="nav-item text-decoration-none bg-success-subtle text-success-emphasis ">
-        <a *ngIf="userProfile" class="nav-link active text-success-emphasis" [routerLink]="['/profile', userProfile.id]">
-          <img [src]="userProfile.profileImage" alt="Profilbild" class="img-thumbnail">
+        <a *ngIf="userProfile" class="nav-link active text-success-emphasis " [routerLink]="['/profile', userProfile.id]">
+          <div class="image-container" >
+            <img [src]="userProfile.profilImage" alt="Profilbild" class="img-fluid">
+          </div>
+
           <p>{{ userProfile.username }}</p>
         </a>
+        <hr>
       </li>
     </ng-container>
 
     <ng-template #notProfile>
-      <li class="nav-item text-decoration-none bg-success-subtle text-success-emphasis ">
-        <a class="nav-link active text-success" href="{{item.link}}">{{item.label}}</a>
+      <li [class.active]="isActive(item.link)" class="nav-item text-decoration-none bg-success-subtle text-success-emphasis ">
+
+        <a class="nav-link active text-success" [routerLink]="item.link">{{item.label}}</a>
       </li>
     </ng-template>
   </ng-container>
+
 </ul>
