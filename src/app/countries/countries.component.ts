@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {CountriesService} from '../services/features/countries/countries.service';
 import {CountryResponse} from '../models/country';
 import {ImageCachingService} from 'src/app/services/image-caching.service';
-import {DelayService} from "../services/delay.service";
 
 @Component({
   selector: 'app-countries',
@@ -19,6 +18,7 @@ export class CountriesComponent implements OnInit {
   searchTerm: string = '';
   isLoading = true;
 
+  // Konstruktor, der Abhängigkeiten wie Router und Services injiziert
   constructor(
     private router: Router,
     private countriesService: CountriesService,
@@ -26,15 +26,18 @@ export class CountriesComponent implements OnInit {
   ) {
   }
 
+  // Getter-Methode, die die Länder für die aktuelle Seite berechnet
   get paginatedCountries(): CountryResponse[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     return this.filteredCountries.slice(startIndex, startIndex + this.pageSize);
   }
 
+  // OnInit-Lebenszyklushaken, der beim Initialisieren der Komponente aufgerufen wird
   ngOnInit(): void {
     this.fetchAndCacheAllCountries();
   }
 
+  // Methode zum Abrufen und Zwischenspeichern aller Länder
   fetchAndCacheAllCountries(): void {
     this.countriesService.fetchAllCountries('=')
       .toPromise()
@@ -58,6 +61,7 @@ export class CountriesComponent implements OnInit {
     event.target.src = 'assets/img/worldIcon.png';
   }
 
+  // Methode zum Laden eines Bildes als Base64-String (Platzhalterimplementierung)
   loadImageAsBase64(url: string): Promise<string> {
     // Deine Implementierung zum Laden des Base64-Bildes
     return Promise.resolve('');  // Dummy-Implementierung
@@ -70,6 +74,7 @@ export class CountriesComponent implements OnInit {
     this.currentPage = 1;
   }
 
+  // Methode zum Abrufen von Ländern nach Anfangsbuchstaben
   getCountriesByLetter(letter: string): void {
     this.countriesService.fetchCountriesByLetter(letter)
       .toPromise()
@@ -83,16 +88,19 @@ export class CountriesComponent implements OnInit {
       });
   }
 
+  // Methode zum Navigieren zu den Details eines Landes
   navigateToCountryDetail(country: CountryResponse): void {
     console.log('Navigiere zu Länderdetails:', country)
     this.router.navigate([`/countries/detail/${country.name}`]);
   }
 
+  // Private Methode zum Zwischenspeichern von Länderflaggen
   private cacheCountryFlags(): Promise<void[]> {
     const flagPromises = this.countries.map(country => this.cacheFlag(country.flag));
     return Promise.all(flagPromises);
   }
 
+  // Private Hilfsmethode zum Zwischenspeichern einer einzelnen Flagge
   private cacheFlag(url: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       if (!this.imageCachingService.isImageCached(url)) {
@@ -108,6 +116,7 @@ export class CountriesComponent implements OnInit {
     });
   }
 
+  // Methode zum Ändern der Seitengröße der Paginierung
   changePageSize(size: number): void {
     this.pageSize = size;
     this.currentPage = 1;

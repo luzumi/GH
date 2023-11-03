@@ -1,5 +1,4 @@
-import {Component, Input, NgModule, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
 import {CountriesService} from 'src/app/services/features/countries/countries.service';
 import {CountryResponse} from "../../models/country";
 import {ActivatedRoute} from "@angular/router";

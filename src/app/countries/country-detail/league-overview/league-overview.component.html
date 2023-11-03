@@ -1,0 +1,31 @@
+<!--countries/country-detail/league-overview.component.ts-->
+
+<!-- Hauptcontainer, der Flexbox verwendet, um die Karten auszurichten und responsiv zu gestalten -->
+<div class="d-flex flex-row flex-wrap justify-content-around align-items-stretch">
+
+  <!-- Flex-Item für die einzelnen Karten -->
+  <div class="p-2">
+
+    <!-- Kartencontainer, der für jedes 'entry' in der 'leagueDetails'-Liste wiederholt wird -->
+    <div class="card" style="width: 18rem;" *ngFor="let entry of leagueDetails">
+
+      <!-- Bild der Liga, das dynamisch aus den Daten geladen wird; mit Styling, um es anpassungsfähig zu machen -->
+      <img class="card-img-top mx-auto" src="{{ entry.league.logo }}" alt="Logo der Liga" style="height: 100px; width: auto; object-fit: contain; padding: 10px;">
+
+      <!-- Körper der Karte, der den Titel und den Button enthält -->
+      <div class="card-body d-flex flex-column justify-content-between">
+
+        <!-- Titel der Karte, bindet den Namen der Liga aus den Daten -->
+        <h5 class="card-title text-center">{{ entry.league.name}}</h5>
+
+        <!-- Button, der beim Klicken die goToLeagueDetails-Methode mit der ID der Liga aufruft -->
+        <a (click)="goToLeagueDetails(entry.league.id)" class="btn btn-primary mt-2">Details</a>
+      </div>
+
+      <!-- Anzeige der Liga-ID; Debugger -->
+      <div>{{entry.league.id}}</div>
+    </div>
+
+  </div>
+</div>
+

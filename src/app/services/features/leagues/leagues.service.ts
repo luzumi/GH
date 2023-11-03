@@ -1,11 +1,10 @@
 // leagues.service.ts:
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {catchError, Observable, tap, throwError} from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { LeagueResponse } from 'src/app/models/league';
-import {CountryResponse} from "../../../models/country";
+import {environment} from 'src/environments/environment';
+import {LeagueResponse} from 'src/app/models/league';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +47,7 @@ export class LeaguesService {
     );
   }
 
-  fetchLeaguesByLeagueName(leagueName: string): Observable<LeagueResponse> {
+  fetchLeaguesByLeagueName(leagueName: number): Observable<LeagueResponse> {
     // return this.httpClient.get<LeagueResponse[]>(`${this.baseUrl}/${countryId}`);
     return this.httpClient.get<LeagueResponse>(`${this.baseUrl}/league/${leagueName}`).pipe(
       tap((data: any) => console.log('Leagues data received:', data)),
