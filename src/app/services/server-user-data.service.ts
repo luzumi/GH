@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserDataService } from './user-data.service';
-import { UserProfile } from 'src/app/models/UserProfile';
-import { UserService } from 'src/app/services/features/user/user.service';  // Importieren Sie den UserService
+import { UserProfile } from '../models/UserProfile';
+import { UserService } from './features/user/user.service';  // Importieren Sie den UserService
 
 @Injectable({
   providedIn: 'root'

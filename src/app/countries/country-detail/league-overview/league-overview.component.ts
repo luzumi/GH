@@ -1,15 +1,18 @@
 // Import-Anweisungen für die notwendigen Angular-Kern- und -Service-Module
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LeagueResponse } from 'src/app/models/league';
-import { LeaguesService } from 'src/app/services/features/leagues/leagues.service';
+import { LeagueResponse } from '../../../models/league';
+import { LeaguesService } from '../../../services/features/leagues/leagues.service';
 import { Router } from '@angular/router';
 
 // Dekorator, der diese Klasse als Angular-Komponente definiert
 @Component({
-  selector: 'app-league-overview', // Der Selector, wie diese Komponente in Templates verwendet wird
-  templateUrl: './league-overview.component.html', // Pfad zur HTML-Vorlage der Komponente
-  styleUrls: ['./league-overview.component.css'] // Pfad zu den Stylesheets der Komponente
+    selector: 'app-league-overview', // Der Selector, wie diese Komponente in Templates verwendet wird
+    templateUrl: './league-overview.component.html', // Pfad zur HTML-Vorlage der Komponente
+    styleUrls: ['./league-overview.component.css'] // Pfad zu den Stylesheets der Komponente
+    ,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class LeagueOverviewComponent implements OnInit {
   leagueDetails!: LeagueResponse[]; // Deklaration einer Eigenschaft zur Speicherung der Ligen-Details, mit Typisierung
