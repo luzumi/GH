@@ -1,14 +1,14 @@
 <!-- app.component.html -->
 
 <!--
-  Die App-Komponente ist die Wurzelkomponente der Anwendung.
-  Sie enthält die Struktur deiner Anwendung und die Navigation.
-  Die Struktur der Anwendung besteht aus einem Header, einem
-  Navigationsbereich, einem Inhaltsbereich und einer Fußzeile.
-  Die Navigation besteht aus einem Menü, das sich ein- und ausblenden lässt.
-  Der Inhaltsbereich ist ein Router-Outlet, in dem die Komponenten deiner Anwendung
-  angezeigt werden.
-  Die Fußzeile ist ein Platzhalter für die Fußzeile deiner Anwendung.
+Die App-Komponente ist die Wurzelkomponente der Anwendung.
+Sie enthält die Struktur deiner Anwendung und die Navigation.
+Die Struktur der Anwendung besteht aus einem Header, einem
+Navigationsbereich, einem Inhaltsbereich und einer Fußzeile.
+Die Navigation besteht aus einem Menü, das sich ein- und ausblenden lässt.
+Der Inhaltsbereich ist ein Router-Outlet, in dem die Komponenten deiner Anwendung
+angezeigt werden.
+Die Fußzeile ist ein Platzhalter für die Fußzeile deiner Anwendung.
 -->
 
 <!-- Hauptcontainer der Anwendung, verwendet Flexbox für das Layout und nimmt die volle Höhe des Viewports ein -->
@@ -29,7 +29,7 @@
   <!-- Navigationsteil der Anwendung, enthält den Menü-Button für kleine Bildschirme -->
   <nav class="app-nav">
     <!-- Menü-Button, der nur auf kleinen Bildschirmen angezeigt wird -->
-<!--    TODO: Menu Darstellung noch buggie-->
+    <!--    TODO: Menu Darstellung noch buggie-->
     <button id="menu-toggle" #menuToggle class="d-md-none btn btn-secondary" (click)="toggleMenu()">
       ☰
     </button>
@@ -41,13 +41,15 @@
 
       <!-- Seitenmenü, das nur angezeigt wird, wenn der Benutzer eingeloggt ist -->
       <!-- TODO: AuthService im Template ist nicht ideal, besser wäre eine Komponentenvariable -->
-      <div *ngIf="AuthService.isLoggedIn.value" class="col-md-3 col-lg-3 d-md-block bg-success-subtle vh-100">
-        <!-- Das eigentliche Menü, dessen Anzeige vom Login-Status abhängt -->
-        <nav id="sidebarMenu" #sidebarMenu class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0"
-             [style.display]="isLoggedIn ? 'block' : 'none'">
-          <menu class="collapsed h-100"></menu>
-        </nav>
-      </div>
+      @if (AuthService.isLoggedIn.value) {
+        <div class="col-md-3 col-lg-3 d-md-block bg-success-subtle vh-100">
+          <!-- Das eigentliche Menü, dessen Anzeige vom Login-Status abhängt -->
+          <nav id="sidebarMenu" #sidebarMenu class="sidebar col-md-3 col-lg-3 d-md-block bg-success-subtle h-100 mt-0"
+            [style.display]="isLoggedIn ? 'block' : 'none'">
+            <menu class="collapsed h-100"></menu>
+          </nav>
+        </div>
+      }
 
       <!-- Hauptinhaltsbereich, in dem die Routen-Komponenten angezeigt werden -->
       <main role="main" class="col-md-9 ml-sm-auto col-lg-9 pt-4 px-md-4 d-flex align-items-top justify-content-center">
