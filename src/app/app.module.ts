@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule, DOCUMENT} from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {MenuComponent} from './menu/menu.component';
@@ -26,8 +26,7 @@ import {SeasonOverviewComponent} from "./countries/country-detail/season-overvie
 
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         ContentComponent,
         HeaderComponent,
         AppComponent,
@@ -43,24 +42,18 @@ import {SeasonOverviewComponent} from "./countries/country-detail/season-overvie
         LeagueDetailComponent,
         SeasonOverviewComponent,
     ],
-    imports: [
-        NgbModule,
+    bootstrap: [AppComponent], imports: [NgbModule,
         BrowserModule,
         CommonModule,
         NgbModule,
-        HttpClientModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule,
-    ],
-    providers: [
-        {provide: DOCUMENT, useValue: document},
-        {provide: USER_DATA_SERVICE, useClass: ServerUserDataService},  // Verwenden Sie den InjectionToken
+        ReactiveFormsModule], providers: [
+        { provide: DOCUMENT, useValue: document },
+        { provide: USER_DATA_SERVICE, useClass: ServerUserDataService }, // Verwenden Sie den InjectionToken
         CountriesService,
         [AuthService],
-
-    ],
-    bootstrap: [AppComponent],
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {
 }
