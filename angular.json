@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "GroundDroppers:build:production"
+              "buildTarget": "GroundDroppers:build:production"
             },
             "development": {
-              "browserTarget": "GroundDroppers:build:development"
+              "buildTarget": "GroundDroppers:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "GroundDroppers:build"
+            "buildTarget": "GroundDroppers:build"
           }
         },
         "test": {
