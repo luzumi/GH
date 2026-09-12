@@ -1,7 +1,7 @@
 // menu.component.ts
 
-import {Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import {Component, OnInit, Inject, ViewChild, ElementRef, DOCUMENT} from '@angular/core';
+
 import {UserDataService, USER_DATA_SERVICE} from '../services/user-data.service';
 import {AuthService} from "../auth.service";
 import {UserProfile} from "../models/UserProfile";
