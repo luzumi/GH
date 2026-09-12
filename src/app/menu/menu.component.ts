@@ -1,6 +1,6 @@
 // menu.component.ts
 
-import {Component, OnInit, Inject, ViewChild, ElementRef, DOCUMENT} from '@angular/core';
+import {Component, OnInit, Inject, ViewChild, ElementRef, DOCUMENT, ChangeDetectionStrategy} from '@angular/core';
 
 import {UserDataService, USER_DATA_SERVICE} from '../services/user-data.service';
 import {AuthService} from "../auth.service";
@@ -11,6 +11,7 @@ import {UserProfile} from "../models/UserProfile";
     selector: 'menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

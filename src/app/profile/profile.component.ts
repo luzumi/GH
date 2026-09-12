@@ -1,5 +1,5 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {UserProfile} from 'src/app/models/UserProfile';
+import {Component, OnInit, Inject, ChangeDetectionStrategy} from '@angular/core';
+import {UserProfile} from '../models/UserProfile';
 import {UserDataService, USER_DATA_SERVICE} from '../services/user-data.service';
 import {AuthService} from "../auth.service";
 
@@ -7,6 +7,7 @@ import {AuthService} from "../auth.service";
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ProfileComponent implements OnInit {

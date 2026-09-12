@@ -2,7 +2,7 @@ import {NgModule, DOCUMENT} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {MenuComponent} from './menu/menu.component';
@@ -53,7 +53,7 @@ import {SeasonOverviewComponent} from "./countries/country-detail/season-overvie
         { provide: USER_DATA_SERVICE, useClass: ServerUserDataService }, // Verwenden Sie den InjectionToken
         CountriesService,
         [AuthService],
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
     ] })
 export class AppModule {
 }

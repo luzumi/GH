@@ -1,6 +1,6 @@
 // league-detail.component.ts
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LeaguesService} from "../../services/features/leagues/leagues.service";
 import {LeagueResponse} from "../../models/league";
@@ -9,6 +9,7 @@ import {LeagueResponse} from "../../models/league";
     selector: 'app-league-detail',
     templateUrl: './league-detail.component.html',
     styleUrls: ['./league-detail.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LeagueDetailComponent implements OnInit {

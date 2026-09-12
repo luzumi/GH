@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CountriesService} from 'src/app/services/features/countries/countries.service';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {CountriesService} from '../../services/features/countries/countries.service';
 import {CountryResponse} from "../../models/country";
 import {ActivatedRoute} from "@angular/router";
 
@@ -8,6 +8,7 @@ import {ActivatedRoute} from "@angular/router";
     selector: 'app-country-detail',
     templateUrl: './country-detail.component.html',
     styleUrls: ['./country-detail.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

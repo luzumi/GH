@@ -3,8 +3,8 @@
 import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable, tap, throwError} from 'rxjs';
-import {environment} from 'src/environments/environment';
-import {LeagueResponse} from 'src/app/models/league';
+import {environment} from '../../../../environments/environment';
+import {LeagueResponse} from '../../../models/league';
 
 @Injectable({
   providedIn: 'root'
