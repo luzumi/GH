@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css']
+    selector: 'content',
+    templateUrl: './content.component.html',
+    styleUrls: ['./content.component.css'],
+    standalone: false
 })
 export class ContentComponent {
 

@@ -7,9 +7,11 @@ import { Router } from '@angular/router';
 
 // Dekorator, der diese Klasse als Angular-Komponente definiert
 @Component({
-  selector: 'app-league-overview', // Der Selector, wie diese Komponente in Templates verwendet wird
-  templateUrl: './league-overview.component.html', // Pfad zur HTML-Vorlage der Komponente
-  styleUrls: ['./league-overview.component.css'] // Pfad zu den Stylesheets der Komponente
+    selector: 'app-league-overview', // Der Selector, wie diese Komponente in Templates verwendet wird
+    templateUrl: './league-overview.component.html', // Pfad zur HTML-Vorlage der Komponente
+    styleUrls: ['./league-overview.component.css'] // Pfad zu den Stylesheets der Komponente
+    ,
+    standalone: false
 })
 export class LeagueOverviewComponent implements OnInit {
   leagueDetails!: LeagueResponse[]; // Deklaration einer Eigenschaft zur Speicherung der Ligen-Details, mit Typisierung

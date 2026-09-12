@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'app-season-overview',
-  templateUrl: './season-overview.component.html',
-  styleUrls: ['./season-overview.component.css']
+    selector: 'app-season-overview',
+    templateUrl: './season-overview.component.html',
+    styleUrls: ['./season-overview.component.css'],
+    standalone: false
 })
 export class SeasonOverviewComponent implements OnInit {
 

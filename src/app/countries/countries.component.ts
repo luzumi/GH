@@ -5,9 +5,10 @@ import {CountryResponse} from '../models/country';
 import {ImageCachingService} from 'src/app/services/image-caching.service';
 
 @Component({
-  selector: 'app-countries',
-  templateUrl: './countries.component.html',
-  styleUrls: ['./countries.component.css']
+    selector: 'app-countries',
+    templateUrl: './countries.component.html',
+    styleUrls: ['./countries.component.css'],
+    standalone: false
 })
 export class CountriesComponent implements OnInit {
   countries: CountryResponse[] = [];

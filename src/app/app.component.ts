@@ -7,9 +7,10 @@ import {NgZone} from '@angular/core';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('sidebarMenu', {static: false}) sidebarMenu!: ElementRef;

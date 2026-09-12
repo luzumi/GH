@@ -10,7 +10,8 @@ import {UserProfile} from "../models/UserProfile";
 @Component({
     selector: 'menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.css']
+    styleUrls: ['./menu.component.css'],
+    standalone: false
 })
 
 

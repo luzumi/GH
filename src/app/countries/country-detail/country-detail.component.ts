@@ -5,9 +5,10 @@ import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
-  selector: 'app-country-detail',
-  templateUrl: './country-detail.component.html',
-  styleUrls: ['./country-detail.component.css']
+    selector: 'app-country-detail',
+    templateUrl: './country-detail.component.html',
+    styleUrls: ['./country-detail.component.css'],
+    standalone: false
 })
 
 export class CountryDetailComponent implements OnInit {
